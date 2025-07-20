@@ -7,10 +7,10 @@
     <!-- Application Structure Plan: La aplicación guía al usuario a través del servicio LITSAPropect. Comienza con una definición (¿Qué es LITSAPropect?), detalla el método (El Proceso del Servicio), explica las técnicas (Metodologías de Calificación), muestra las herramientas (Nuestra Tecnología) y demuestra el valor (El Impacto en Cifras), concluyendo con un llamado a la acción. Esta estructura convierte la información en una experiencia de descubrimiento. -->
     <!-- Visualization & Content Choices:
          - Resumen Ejecutivo -> Goal: Inform -> Method: Card-based text block. Justification: Presenta el servicio de forma clara y directa.
-         - El Proceso del Servicio -> Goal: Organize/Change -> Method: Interactive flowchart cards. Justification: Visualiza el flujo de trabajo del servicio, haciéndolo fácil de seguir.
+         - El Proceso del Servicio -> Goal: Organize/Change -> Method: Vertical alternating timeline. Justification: Creates a more dynamic and visually engaging flow for the process, addressing user feedback about the previous "flat" design.
          - Metodologías de Calificación -> Goal: Compare/Organize -> Method: Interactive clickable cards. Justification: Permite comparar las metodologías que utiliza LITSA para calificar leads.
          - Nuestra Tecnología -> Goal: Inform/Compare -> Method: Donut Chart (Chart.js). Justification: Muestra visualmente las áreas tecnológicas que cubre el servicio.
-         - Impacto del Servicio -> Goal: Compare/Inform -> Method: Bar Chart with interactive buttons. Justification: Demuestra el valor del servicio comparando el "antes" y el "después", un método de persuasión visual muy efectivo.
+         - Impacto del Servicio -> Goal: Compare/Inform -> Method: Two separate Bar Charts. Justification: Solves the data scale issue by giving each data magnitude its own chart, making the comparison much more impactful and clear for the user.
          - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,13 +20,11 @@
         body { font-family: 'Inter', sans-serif; background-color: #f7f8fc; color: #1e293b; }
         .card { background-color: white; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05); transition: all 0.3s ease-in-out; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        .step-item.active { background-color: #4f46e5; color: white; }
-        .step-item.active h3, .step-item.active p { color: white; }
-        .step-item.active .step-icon { background-color: white; color: #4f46e5; }
         .framework-item.active { border-color: #4f46e5; background-color: #eef2ff; }
         .content-area { transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; }
-        .chart-container { position: relative; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto; height: 320px; max-height: 400px; }
-        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .chart-container { position: relative; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto; height: 150px; }
+        .donut-chart-container { position: relative; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto; height: 320px; max-height: 400px; }
+        @media (min-width: 768px) { .donut-chart-container { height: 350px; } }
     </style>
 </head>
 <body class="antialiased">
@@ -61,18 +59,120 @@
                 </div>
             </section>
 
-            <section id="process" class="card p-8">
-                <h2 class="text-2xl font-bold text-center text-slate-800 mb-8">Nuestro Proceso: De la Estrategia a la Reunión</h2>
-                <div class="lg:flex gap-8">
-                    <div id="process-steps" class="flex-none lg:w-1/3 grid grid-cols-2 lg:grid-cols-1 gap-3">
-                        <!-- Los pasos del proceso se insertarán aquí con JS -->
-                    </div>
-                    <div class="flex-grow mt-6 lg:mt-0">
-                        <div id="process-content" class="content-area bg-indigo-50 p-6 rounded-lg min-h-[250px]">
-                            <!-- El contenido del paso seleccionado se mostrará aquí -->
+            <!-- NUEVO DISEÑO DE PROCESO - TIMELINE -->
+            <section class="card p-8">
+                <h2 class="text-2xl font-bold text-center text-slate-800 mb-12">Nuestro Proceso: De la Estrategia a la Reunión</h2>
+                <div class="relative container mx-auto px-6 flex flex-col space-y-8">
+                    <div class="absolute z-0 w-2 h-full bg-indigo-100 shadow-md inset-0 top-0 left-1/2 -ml-1"></div>
+                    
+                    <!-- Step 1 -->
+                    <div class="relative z-10">
+                        <div class="timeline-container">
+                            <div class="timeline-pointer" aria-hidden="true"></div>
+                            <div class="bg-slate-100 p-6 rounded-md shadow-md">
+                                <span class="font-bold text-indigo-600 text-sm tracking-wide">Paso 1</span>
+                                <h3 class="text-xl font-bold pt-1">Estrategia y Definición</h3>
+                                <p class="pt-2 text-slate-600">Realizamos sesiones de descubrimiento para entender a fondo tu negocio, tu propuesta de valor y tus clientes exitosos. A partir de ahí, construimos un Perfil de Cliente Ideal (ICP) detallado y definimos los mensajes clave que resonarán con ese público.</p>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="relative z-10">
+                        <div class="timeline-container-left">
+                            <div class="timeline-pointer-left" aria-hidden="true"></div>
+                            <div class="bg-slate-100 p-6 rounded-md shadow-md">
+                                <span class="font-bold text-indigo-600 text-sm tracking-wide">Paso 2</span>
+                                <h3 class="text-xl font-bold pt-1">Prospección Inteligente</h3>
+                                <p class="pt-2 text-slate-600">Utilizamos tecnología avanzada y bases de datos B2B para identificar empresas y contactos que se ajustan al ICP. Cada prospecto es verificado para asegurar la calidad de los datos antes de iniciar cualquier contacto, maximizando la efectividad.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative z-10">
+                        <div class="timeline-container">
+                            <div class="timeline-pointer" aria-hidden="true"></div>
+                            <div class="bg-slate-100 p-6 rounded-md shadow-md">
+                                <span class="font-bold text-indigo-600 text-sm tracking-wide">Paso 3</span>
+                                <h3 class="text-xl font-bold pt-1">Cadencias Multicanal</h3>
+                                <p class="pt-2 text-slate-600">Diseñamos y ejecutamos secuencias de contacto que combinan emails personalizados, llamadas estratégicas y mensajes en LinkedIn. El objetivo es aportar valor en cada interacción, no solo pedir una reunión.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                     <div class="relative z-10">
+                        <div class="timeline-container-left">
+                            <div class="timeline-pointer-left" aria-hidden="true"></div>
+                            <div class="bg-slate-100 p-6 rounded-md shadow-md">
+                                <span class="font-bold text-indigo-600 text-sm tracking-wide">Paso 4</span>
+                                <h3 class="text-xl font-bold pt-1">Calificación de Leads</h3>
+                                <p class="pt-2 text-slate-600">Mantenemos conversaciones consultivas para entender los desafíos y necesidades reales del prospecto. Aplicamos frameworks como BANT o CHAMP para confirmar que existe una oportunidad real y que vale la pena para tu equipo de ventas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="relative z-10">
+                        <div class="timeline-container">
+                            <div class="timeline-pointer" aria-hidden="true"></div>
+                            <div class="bg-slate-100 p-6 rounded-md shadow-md">
+                                <span class="font-bold text-indigo-600 text-sm tracking-wide">Paso 5</span>
+                                <h3 class="text-xl font-bold pt-1">Agendamiento y Entrega</h3>
+                                <p class="pt-2 text-slate-600">Una vez que un lead está calificado (SQL), coordinamos todos los detalles para agendar una reunión directamente en el calendario de tu ejecutivo de ventas. Preparamos un informe completo con todo el contexto para una transición fluida.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="relative z-10">
+                        <div class="timeline-container-left">
+                            <div class="timeline-pointer-left" aria-hidden="true"></div>
+                            <div class="bg-slate-100 p-6 rounded-md shadow-md">
+                                <span class="font-bold text-indigo-600 text-sm tracking-wide">Paso 6</span>
+                                <h3 class="text-xl font-bold pt-1">Reportes y Optimización</h3>
+                                <p class="pt-2 text-slate-600">Proveemos total visibilidad con reportes detallados sobre las métricas clave. Usamos estos datos para crear un ciclo de retroalimentación y optimizar continuamente la estrategia para mejorar los resultados.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <style>
+                    .timeline-container {
+                        position: relative;
+                        width: 50%;
+                        margin-left: 50%;
+                        padding-left: 2.5rem;
+                    }
+                    .timeline-container-left {
+                        position: relative;
+                        width: 50%;
+                        margin-right: 50%;
+                        padding-right: 2.5rem;
+                        text-align: right;
+                    }
+                    .timeline-pointer {
+                        position: absolute;
+                        top: 1.25rem;
+                        left: -0.625rem;
+                        height: 1.25rem;
+                        width: 1.25rem;
+                        background: #4f46e5;
+                        border-radius: 9999px;
+                        z-index: 10;
+                    }
+                     .timeline-pointer-left {
+                        position: absolute;
+                        top: 1.25rem;
+                        right: -0.625rem;
+                        height: 1.25rem;
+                        width: 1.25rem;
+                        background: #4f46e5;
+                        border-radius: 9999px;
+                        z-index: 10;
+                    }
+                </style>
             </section>
 
             <section id="methodology" class="card p-8">
@@ -90,17 +190,27 @@
                     <div class="text-center">
                         <h2 class="text-2xl font-bold text-slate-800 mb-2">Nuestra Tecnología</h2>
                         <p class="text-slate-600 mb-6">Las herramientas que potencian nuestro servicio.</p>
-                        <div class="chart-container">
+                        <div class="donut-chart-container">
                             <canvas id="techStackChart"></canvas>
                         </div>
                     </div>
                     <div class="text-center">
-                        <h2 class="text-2xl font-bold text-slate-800 mb-2">El Impacto en Cifras</h2>
-                        <p class="text-slate-600 mb-6">Compara los resultados con y sin LITSAPropect.</p>
-                        <div class="chart-container">
-                            <canvas id="impactChart"></canvas>
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">El Impacto en Cifras</h2>
+                        <div class="space-y-8">
+                            <div>
+                                <h3 class="font-semibold text-slate-700">Alcance de Prospección</h3>
+                                <div class="chart-container mt-2">
+                                    <canvas id="impactChartProspects"></canvas>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-700">Resultados Clave</h3>
+                                <div class="chart-container mt-2">
+                                    <canvas id="impactChartResults"></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-4 flex justify-center space-x-2">
+                        <div class="mt-6 flex justify-center space-x-2">
                             <button id="btn-without-litsa" class="px-4 py-2 text-sm font-medium rounded-md bg-gray-200 text-gray-800 transition">Sin LITSAPropect</button>
                             <button id="btn-with-litsa" class="px-4 py-2 text-sm font-medium rounded-md bg-indigo-600 text-white transition">Con LITSAPropect</button>
                         </div>
@@ -111,7 +221,7 @@
             <section id="conclusion" class="text-center py-12">
                  <h2 class="text-3xl font-extrabold text-slate-800">¿Listo para Llenar tu Calendario de Reuniones?</h2>
                  <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Deja que nuestro equipo de expertos se encargue de la prospección para que el tuyo pueda enfocarse en vender. El modelo de <strong>SDR-como-Servicio</strong> es la forma más inteligente de escalar tu crecimiento.</p>
-                 <a href="#" class="mt-8 inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition-colors">Contacta a un Experto</a>
+                 <a href="https://www.agendalitsa.site" target="_blank" rel="noopener noreferrer" class="mt-8 inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition-colors">Contacta a un Experto</a>
             </section>
         </main>
     </div>
@@ -119,37 +229,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA ---
-            const processData = [
-                { id: 1, icon: 'fa-compass-drafting', title: 'Estrategia y Definición', description: 'Realizamos sesiones de descubrimiento para entender a fondo tu negocio, tu propuesta de valor y tus clientes exitosos. A partir de ahí, construimos un Perfil de Cliente Ideal (ICP) detallado y definimos los mensajes clave que resonarán con ese público.' },
-                { id: 2, icon: 'fa-bullseye', title: 'Prospección Inteligente', description: 'Utilizamos tecnología avanzada y bases de datos B2B para identificar empresas y contactos que se ajustan al ICP. Cada prospecto es verificado para asegurar la calidad de los datos antes de iniciar cualquier contacto, maximizando la efectividad.' },
-                { id: 3, icon: 'fa-comments', title: 'Cadencias Multicanal', description: 'Diseñamos y ejecutamos secuencias de contacto que combinan emails personalizados, llamadas estratégicas, mensajes en LinkedIn y otros puntos de contacto. El objetivo es aportar valor en cada interacción, no solo pedir una reunión.' },
-                { id: 4, icon: 'fa-clipboard-check', title: 'Calificación de Leads', description: 'Mantenemos conversaciones consultivas para entender los desafíos y necesidades reales del prospecto. Aplicamos frameworks como BANT o CHAMP para confirmar que existe una oportunidad real y que vale la pena para tu equipo de ventas.' },
-                { id: 5, icon: 'fa-calendar-alt', title: 'Agendamiento y Entrega', description: 'Una vez que un lead está calificado (SQL), coordinamos todos los detalles para agendar una reunión directamente en el calendario de tu ejecutivo de ventas. Preparamos un informe completo con todo el contexto de la conversación para una transición fluida.' },
-                { id: 6, icon: 'fa-chart-line', title: 'Reportes y Optimización', description: 'Proveemos total visibilidad con reportes detallados sobre las métricas clave (tasas de apertura, respuesta, reuniones, etc.). Usamos estos datos para crear un ciclo de retroalimentación y optimizar continuamente la estrategia para mejorar los resultados.' },
-            ];
             const frameworkData = {
                 BANT: { title: 'BANT', criteria: ['<strong>Presupuesto (Budget):</strong> ¿El prospecto tiene los fondos necesarios?', '<strong>Autoridad (Authority):</strong> ¿Hablamos con quien toma la decisión?', '<strong>Necesidad (Need):</strong> ¿Nuestro producto resuelve un problema real para ellos?', '<strong>Plazo (Timeline):</strong> ¿Cuándo planean realizar la compra?'] },
                 CHAMP: { title: 'CHAMP', criteria: ['<strong>Desafíos (Challenges):</strong> ¿Cuáles son sus problemas y objetivos prioritarios?', '<strong>Autoridad (Authority):</strong> ¿Quién está involucrado en la decisión de compra?', '<strong>Dinero (Money):</strong> ¿Cuál es el impacto financiero del problema y el presupuesto?', '<strong>Priorización (Priorization):</strong> ¿Resolver este desafío es una prioridad para ellos ahora?'] },
                 SPICED: { title: 'SPICED', criteria: ['<strong>Situación (Situation):</strong> ¿Cuál es su contexto actual y sus herramientas?', '<strong>Dolor (Pain):</strong> ¿Qué frustraciones o ineficiencias están experimentando?', '<strong>Impacto (Impact):</strong> ¿Cuál es el impacto cuantificable (costo, tiempo) de ese dolor?', '<strong>Evento Crítico (Critical Event):</strong> ¿Hay alguna fecha o evento que impulse la urgencia?', '<strong>Decisión (Decision):</strong> ¿Cómo es su proceso de decisión y quiénes participan?'] },
             };
-
-            // --- INTERACTIVE PROCESS SECTION ---
-            const processStepsContainer = document.getElementById('process-steps');
-            const processContentContainer = document.getElementById('process-content');
-            processData.forEach(step => {
-                const stepEl = document.createElement('div');
-                stepEl.className = 'step-item card flex lg:flex-col items-center text-left p-4 cursor-pointer';
-                stepEl.dataset.id = step.id;
-                stepEl.innerHTML = `
-                    <div class="step-icon w-12 h-12 flex-none bg-indigo-100 rounded-full flex items-center justify-center mr-4 lg:mr-0 lg:mb-4">
-                        <i class="fas ${step.icon} text-xl text-indigo-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-700">${step.title}</h3>
-                    </div>
-                `;
-                processStepsContainer.appendChild(stepEl);
-            });
 
             const updateContent = (container, html) => {
                 container.style.opacity = 0;
@@ -160,19 +244,6 @@
                     container.style.transform = 'translateY(0)';
                 }, 200);
             };
-
-            const selectStep = (id) => {
-                const data = processData.find(s => s.id == id);
-                if (data) {
-                    const html = `<h3 class="font-bold text-xl text-slate-800 mb-3">${data.title}</h3><p class="text-slate-600">${data.description}</p>`;
-                    updateContent(processContentContainer, html);
-                    document.querySelectorAll('.step-item').forEach(el => el.classList.remove('active'));
-                    document.querySelector(`.step-item[data-id="${id}"]`).classList.add('active');
-                }
-            };
-
-            processStepsContainer.addEventListener('click', (e) => e.target.closest('.step-item') && selectStep(e.target.closest('.step-item').dataset.id));
-            selectStep(1); // Select first step on load
 
             // --- METHODOLOGY SECTION ---
             const frameworkSelectorsContainer = document.getElementById('framework-selectors');
@@ -230,26 +301,36 @@
                 options: { ...commonTooltipOptions, responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { ...commonTooltipOptions.plugins, legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } } } }
             });
             
-            // Impact Chart
-            const impactCtx = document.getElementById('impactChart').getContext('2d');
+            // --- IMPACT CHARTS (SEPARATED) ---
             const impactData = {
                 withoutLitsa: {
-                    data: [500, 4, 8],
-                    colors: ['#a5b4fc', '#fca5a5', '#fcd34d']
+                    prospects: [500],
+                    results: [2, 4],
+                    colors: {
+                        prospects: ['#a5b4fc'],
+                        results: ['#fca5a5', '#fcd34d']
+                    }
                 },
                 withLitsa: {
-                    data: [2000, 18, 45],
-                    colors: ['#60a5fa', '#4ade80', '#f59e0b']
+                    prospects: [2000],
+                    results: [25, 60],
+                    colors: {
+                        prospects: ['#60a5fa'],
+                        results: ['#4ade80', '#f59e0b']
+                    }
                 }
             };
-            const impactChart = new Chart(impactCtx, {
+
+            // Chart 1: Prospects
+            const impactProspectsCtx = document.getElementById('impactChartProspects').getContext('2d');
+            const impactChartProspects = new Chart(impactProspectsCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Prospectos Contactados', 'Tasa de Respuesta (%)', 'Reuniones Agendadas'],
+                    labels: ['Prospectos Contactados'],
                     datasets: [{
                         label: 'Resultado Mensual',
-                        data: impactData.withLitsa.data,
-                        backgroundColor: impactData.withLitsa.colors,
+                        data: impactData.withLitsa.prospects,
+                        backgroundColor: impactData.withLitsa.colors.prospects,
                         borderRadius: 6,
                         borderSkipped: false,
                     }]
@@ -257,17 +338,42 @@
                 options: { ...commonTooltipOptions, responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { drawBorder: false } }, x: { grid: { display: false } } }, plugins: { ...commonTooltipOptions.plugins, legend: { display: false } } }
             });
 
+            // Chart 2: Results
+            const impactResultsCtx = document.getElementById('impactChartResults').getContext('2d');
+            const impactChartResults = new Chart(impactResultsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Tasa de Respuesta (%)', 'Reuniones Agendadas'],
+                    datasets: [{
+                        label: 'Resultado Mensual',
+                        data: impactData.withLitsa.results,
+                        backgroundColor: impactData.withLitsa.colors.results,
+                        borderRadius: 6,
+                        borderSkipped: false,
+                    }]
+                },
+                options: { ...commonTooltipOptions, responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 70, grid: { drawBorder: false } }, x: { grid: { display: false } } }, plugins: { ...commonTooltipOptions.plugins, legend: { display: false } } }
+            });
+
             const btnWithoutLitsa = document.getElementById('btn-without-litsa');
             const btnWithLitsa = document.getElementById('btn-with-litsa');
 
             const updateImpactChart = (isWithLitsa) => {
-                const dataset = impactChart.data.datasets[0];
                 const stateData = isWithLitsa ? impactData.withLitsa : impactData.withoutLitsa;
                 
-                dataset.data = stateData.data;
-                dataset.backgroundColor = stateData.colors;
-                impactChart.update();
+                // Update prospects chart
+                const prospectsDataset = impactChartProspects.data.datasets[0];
+                prospectsDataset.data = stateData.prospects;
+                prospectsDataset.backgroundColor = stateData.colors.prospects;
+                impactChartProspects.update();
 
+                // Update results chart
+                const resultsDataset = impactChartResults.data.datasets[0];
+                resultsDataset.data = stateData.results;
+                resultsDataset.backgroundColor = stateData.colors.results;
+                impactChartResults.update();
+
+                // Update button styles
                 btnWithLitsa.classList.toggle('bg-indigo-600', isWithLitsa);
                 btnWithLitsa.classList.toggle('text-white', isWithLitsa);
                 btnWithLitsa.classList.toggle('bg-gray-200', !isWithLitsa);
