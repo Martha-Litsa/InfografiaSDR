@@ -120,12 +120,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA ---
             const processData = [
-                { id: 1, icon: 'fa-compass-drafting', title: 'Estrategia y Definición', description: 'Entendemos tu producto, mercado y definimos juntos el Perfil de Cliente Ideal (ICP). Creamos los mensajes y las cadencias de contacto para asegurar que nos dirigimos al público correcto con el mensaje adecuado.' },
-                { id: 2, icon: 'fa-bullseye', title: 'Prospección Inteligente', description: 'Utilizamos bases de datos enriquecidas y tecnología para construir listas de prospectos validados que se ajusten perfectamente a tu negocio. La calidad precede a la cantidad.' },
-                { id: 3, icon: 'fa-comments', title: 'Cadencias Multicanal', description: 'Ejecutamos secuencias de contacto personalizadas a través de email, llamadas y redes sociales (como LinkedIn) para maximizar la tasa de respuesta y generar conversaciones de valor.' },
-                { id: 4, icon: 'fa-clipboard-check', title: 'Calificación de Leads', description: 'Cada prospecto es evaluado por nuestros expertos SDR usando frameworks probados para asegurar que cumple con los criterios de calificación antes de agendar una reunión.' },
-                { id: 5, icon: 'fa-calendar-alt', title: 'Agendamiento y Entrega', description: 'Gestionamos la logística y agendamos las reuniones directamente en los calendarios de tu equipo de ventas, entregando oportunidades calificadas y listas para ser atendidas.' },
-                { id: 6, icon: 'fa-chart-line', title: 'Reportes y Optimización', description: 'Recibes informes detallados sobre el rendimiento. Analizamos los resultados y optimizamos las campañas para mejorar el rendimiento mes a mes, asegurando una mejora continua.' },
+                { id: 1, icon: 'fa-compass-drafting', title: 'Estrategia y Definición', description: 'Realizamos sesiones de descubrimiento para entender a fondo tu negocio, tu propuesta de valor y tus clientes exitosos. A partir de ahí, construimos un Perfil de Cliente Ideal (ICP) detallado y definimos los mensajes clave que resonarán con ese público.' },
+                { id: 2, icon: 'fa-bullseye', title: 'Prospección Inteligente', description: 'Utilizamos tecnología avanzada y bases de datos B2B para identificar empresas y contactos que se ajustan al ICP. Cada prospecto es verificado para asegurar la calidad de los datos antes de iniciar cualquier contacto, maximizando la efectividad.' },
+                { id: 3, icon: 'fa-comments', title: 'Cadencias Multicanal', description: 'Diseñamos y ejecutamos secuencias de contacto que combinan emails personalizados, llamadas estratégicas, mensajes en LinkedIn y otros puntos de contacto. El objetivo es aportar valor en cada interacción, no solo pedir una reunión.' },
+                { id: 4, icon: 'fa-clipboard-check', title: 'Calificación de Leads', description: 'Mantenemos conversaciones consultivas para entender los desafíos y necesidades reales del prospecto. Aplicamos frameworks como BANT o CHAMP para confirmar que existe una oportunidad real y que vale la pena para tu equipo de ventas.' },
+                { id: 5, icon: 'fa-calendar-alt', title: 'Agendamiento y Entrega', description: 'Una vez que un lead está calificado (SQL), coordinamos todos los detalles para agendar una reunión directamente en el calendario de tu ejecutivo de ventas. Preparamos un informe completo con todo el contexto de la conversación para una transición fluida.' },
+                { id: 6, icon: 'fa-chart-line', title: 'Reportes y Optimización', description: 'Proveemos total visibilidad con reportes detallados sobre las métricas clave (tasas de apertura, respuesta, reuniones, etc.). Usamos estos datos para crear un ciclo de retroalimentación y optimizar continuamente la estrategia para mejorar los resultados.' },
             ];
             const frameworkData = {
                 BANT: { title: 'BANT', criteria: ['<strong>Presupuesto (Budget):</strong> ¿El prospecto tiene los fondos necesarios?', '<strong>Autoridad (Authority):</strong> ¿Hablamos con quien toma la decisión?', '<strong>Necesidad (Need):</strong> ¿Nuestro producto resuelve un problema real para ellos?', '<strong>Plazo (Timeline):</strong> ¿Cuándo planean realizar la compra?'] },
@@ -234,12 +234,12 @@
             const impactCtx = document.getElementById('impactChart').getContext('2d');
             const impactData = {
                 withoutLitsa: {
-                    data: [500, 5, 10],
-                    colors: ['#a5b4fc', '#a7f3d0', '#fcd34d']
+                    data: [500, 4, 8],
+                    colors: ['#a5b4fc', '#fca5a5', '#fcd34d']
                 },
                 withLitsa: {
                     data: [2000, 18, 45],
-                    colors: ['#60a5fa', '#34d399', '#f59e0b']
+                    colors: ['#60a5fa', '#4ade80', '#f59e0b']
                 }
             };
             const impactChart = new Chart(impactCtx, {
