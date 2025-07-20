@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía Interactiva: LITSASDR por LITSA</title>
+    <!-- Application Structure Plan: La aplicación guía al usuario a través del servicio LITSAPropect. Comienza con una definición (¿Qué es LITSAPropect?), detalla el método (El Proceso del Servicio), explica las técnicas (Metodologías de Calificación), muestra las herramientas (Nuestra Tecnología) y demuestra el valor (El Impacto en Cifras), concluyendo con un llamado a la acción. Esta estructura convierte la información en una experiencia de descubrimiento. -->
+    <!-- Visualization & Content Choices:
+         - Resumen Ejecutivo -> Goal: Inform -> Method: Card-based text block. Justification: Presenta el servicio de forma clara y directa.
+         - El Proceso del Servicio -> Goal: Organize/Change -> Method: Interactive flowchart cards. Justification: Visualiza el flujo de trabajo del servicio, haciéndolo fácil de seguir.
+         - Metodologías de Calificación -> Goal: Compare/Organize -> Method: Interactive clickable cards. Justification: Permite comparar las metodologías que utiliza LITSA para calificar leads.
+         - Nuestra Tecnología -> Goal: Inform/Compare -> Method: Donut Chart (Chart.js). Justification: Muestra visualmente las áreas tecnológicas que cubre el servicio.
+         - Impacto del Servicio -> Goal: Compare/Inform -> Method: Bar Chart with interactive buttons. Justification: Demuestra el valor del servicio comparando el "antes" y el "después", un método de persuasión visual muy efectivo.
+         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f8fc; color: #1e293b; }
+        .card { background-color: white; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05); transition: all 0.3s ease-in-out; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        .step-item.active { background-color: #4f46e5; color: white; }
+        .step-item.active h3, .step-item.active p { color: white; }
+        .step-item.active .step-icon { background-color: white; color: #4f46e5; }
+        .framework-item.active { border-color: #4f46e5; background-color: #eef2ff; }
+        .content-area { transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; }
+        .chart-container { position: relative; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto; height: 320px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+
+        <header class="text-center py-8 md:py-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800">Potencia tu Crecimiento con LITSAPropect</h1>
+            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Una infografía interactiva sobre nuestro servicio de SDR, diseñado para conectar tu equipo de ventas con clientes potenciales calificados.</p>
+        </header>
+
+        <main class="space-y-16">
+            <section id="intro" class="card p-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4 text-center">¿Qué es LITSAPropect?</h2>
+                <p class="text-slate-600 mb-6 text-center max-w-4xl mx-auto">Es un servicio especializado de <strong>Desarrollo de Representantes de Ventas (SDR)</strong>. Actuamos como una extensión de tu equipo, gestionando todo el ciclo de prospección B2B, desde identificar a tu cliente ideal hasta agendar reuniones calificadas para que tu equipo solo se enfoque en <strong>cerrar negocios</strong>.</p>
+                <div class="grid md:grid-cols-3 gap-6 mt-6">
+                    <div class="text-center p-6 bg-slate-50 rounded-xl">
+                        <i class="fas fa-filter-circle-dollar text-4xl text-indigo-500 mb-3"></i>
+                        <h3 class="font-bold text-lg text-slate-700">Ahorro de Tiempo y Recursos</h3>
+                        <p class="text-sm text-slate-500 mt-1">Tu equipo de ventas se enfoca 100% en cerrar tratos, no en buscar prospectos.</p>
+                    </div>
+                    <div class="text-center p-6 bg-slate-50 rounded-xl">
+                        <i class="fas fa-layer-group text-4xl text-green-500 mb-3"></i>
+                        <h3 class="font-bold text-lg text-slate-700">Pipeline Predecible</h3>
+                        <p class="text-sm text-slate-500 mt-1">Genera un flujo constante y predecible de oportunidades de venta calificadas.</p>
+                    </div>
+                    <div class="text-center p-6 bg-slate-50 rounded-xl">
+                        <i class="fas fa-bolt text-4xl text-amber-500 mb-3"></i>
+                        <h3 class="font-bold text-lg text-slate-700">Expertise y Tecnología</h3>
+                        <p class="text-sm text-slate-500 mt-1">Accede a un equipo especializado y a las mejores herramientas de prospección del mercado.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="process" class="card p-8">
+                <h2 class="text-2xl font-bold text-center text-slate-800 mb-8">Nuestro Proceso: De la Estrategia a la Reunión</h2>
+                <div class="lg:flex gap-8">
+                    <div id="process-steps" class="flex-none lg:w-1/3 grid grid-cols-2 lg:grid-cols-1 gap-3">
+                        <!-- Los pasos del proceso se insertarán aquí con JS -->
+                    </div>
+                    <div class="flex-grow mt-6 lg:mt-0">
+                        <div id="process-content" class="content-area bg-indigo-50 p-6 rounded-lg min-h-[250px]">
+                            <!-- El contenido del paso seleccionado se mostrará aquí -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="methodology" class="card p-8">
+                <h2 class="text-2xl font-bold text-center text-slate-800 mb-8">Metodologías de Calificación que Utilizamos</h2>
+                 <div id="framework-selectors" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-center">
+                    <!-- Los selectores de framework se insertarán aquí con JS -->
+                </div>
+                <div id="framework-content" class="content-area bg-slate-50 p-6 rounded-lg min-h-[180px]">
+                    <!-- El contenido del framework seleccionado se mostrará aquí -->
+                </div>
+            </section>
+
+            <section id="visualization" class="card p-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Nuestra Tecnología</h2>
+                        <p class="text-slate-600 mb-6">Las herramientas que potencian nuestro servicio.</p>
+                        <div class="chart-container">
+                            <canvas id="techStackChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">El Impacto en Cifras</h2>
+                        <p class="text-slate-600 mb-6">Compara los resultados con y sin LITSAPropect.</p>
+                        <div class="chart-container">
+                            <canvas id="impactChart"></canvas>
+                        </div>
+                        <div class="mt-4 flex justify-center space-x-2">
+                            <button id="btn-without-litsa" class="px-4 py-2 text-sm font-medium rounded-md bg-gray-200 text-gray-800 transition">Sin LITSAPropect</button>
+                            <button id="btn-with-litsa" class="px-4 py-2 text-sm font-medium rounded-md bg-indigo-600 text-white transition">Con LITSAPropect</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conclusion" class="text-center py-12">
+                 <h2 class="text-3xl font-extrabold text-slate-800">¿Listo para Llenar tu Calendario de Reuniones?</h2>
+                 <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Deja que nuestro equipo de expertos se encargue de la prospección para que el tuyo pueda enfocarse en vender. El modelo de <strong>SDR-como-Servicio</strong> es la forma más inteligente de escalar tu crecimiento.</p>
+                 <a href="#" class="mt-8 inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition-colors">Contacta a un Experto</a>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA ---
+            const processData = [
+                { id: 1, icon: 'fa-compass-drafting', title: 'Estrategia y Definición', description: 'Entendemos tu producto, mercado y definimos juntos el Perfil de Cliente Ideal (ICP). Creamos los mensajes y las cadencias de contacto para asegurar que nos dirigimos al público correcto con el mensaje adecuado.' },
+                { id: 2, icon: 'fa-bullseye', title: 'Prospección Inteligente', description: 'Utilizamos bases de datos enriquecidas y tecnología para construir listas de prospectos validados que se ajusten perfectamente a tu negocio. La calidad precede a la cantidad.' },
+                { id: 3, icon: 'fa-comments', title: 'Cadencias Multicanal', description: 'Ejecutamos secuencias de contacto personalizadas a través de email, llamadas y redes sociales (como LinkedIn) para maximizar la tasa de respuesta y generar conversaciones de valor.' },
+                { id: 4, icon: 'fa-clipboard-check', title: 'Calificación de Leads', description: 'Cada prospecto es evaluado por nuestros expertos SDR usando frameworks probados para asegurar que cumple con los criterios de calificación antes de agendar una reunión.' },
+                { id: 5, icon: 'fa-calendar-alt', title: 'Agendamiento y Entrega', description: 'Gestionamos la logística y agendamos las reuniones directamente en los calendarios de tu equipo de ventas, entregando oportunidades calificadas y listas para ser atendidas.' },
+                { id: 6, icon: 'fa-chart-line', title: 'Reportes y Optimización', description: 'Recibes informes detallados sobre el rendimiento. Analizamos los resultados y optimizamos las campañas para mejorar el rendimiento mes a mes, asegurando una mejora continua.' },
+            ];
+            const frameworkData = {
+                BANT: { title: 'BANT', criteria: ['<strong>Presupuesto (Budget):</strong> ¿El prospecto tiene los fondos necesarios?', '<strong>Autoridad (Authority):</strong> ¿Hablamos con quien toma la decisión?', '<strong>Necesidad (Need):</strong> ¿Nuestro producto resuelve un problema real para ellos?', '<strong>Plazo (Timeline):</strong> ¿Cuándo planean realizar la compra?'] },
+                CHAMP: { title: 'CHAMP', criteria: ['<strong>Desafíos (Challenges):</strong> ¿Cuáles son sus problemas y objetivos prioritarios?', '<strong>Autoridad (Authority):</strong> ¿Quién está involucrado en la decisión de compra?', '<strong>Dinero (Money):</strong> ¿Cuál es el impacto financiero del problema y el presupuesto?', '<strong>Priorización (Priorization):</strong> ¿Resolver este desafío es una prioridad para ellos ahora?'] },
+                SPICED: { title: 'SPICED', criteria: ['<strong>Situación (Situation):</strong> ¿Cuál es su contexto actual y sus herramientas?', '<strong>Dolor (Pain):</strong> ¿Qué frustraciones o ineficiencias están experimentando?', '<strong>Impacto (Impact):</strong> ¿Cuál es el impacto cuantificable (costo, tiempo) de ese dolor?', '<strong>Evento Crítico (Critical Event):</strong> ¿Hay alguna fecha o evento que impulse la urgencia?', '<strong>Decisión (Decision):</strong> ¿Cómo es su proceso de decisión y quiénes participan?'] },
+            };
+
+            // --- INTERACTIVE PROCESS SECTION ---
+            const processStepsContainer = document.getElementById('process-steps');
+            const processContentContainer = document.getElementById('process-content');
+            processData.forEach(step => {
+                const stepEl = document.createElement('div');
+                stepEl.className = 'step-item card flex lg:flex-col items-center text-left p-4 cursor-pointer';
+                stepEl.dataset.id = step.id;
+                stepEl.innerHTML = `
+                    <div class="step-icon w-12 h-12 flex-none bg-indigo-100 rounded-full flex items-center justify-center mr-4 lg:mr-0 lg:mb-4">
+                        <i class="fas ${step.icon} text-xl text-indigo-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-700">${step.title}</h3>
+                    </div>
+                `;
+                processStepsContainer.appendChild(stepEl);
+            });
+
+            const updateContent = (container, html) => {
+                container.style.opacity = 0;
+                container.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    container.innerHTML = html;
+                    container.style.opacity = 1;
+                    container.style.transform = 'translateY(0)';
+                }, 200);
+            };
+
+            const selectStep = (id) => {
+                const data = processData.find(s => s.id == id);
+                if (data) {
+                    const html = `<h3 class="font-bold text-xl text-slate-800 mb-3">${data.title}</h3><p class="text-slate-600">${data.description}</p>`;
+                    updateContent(processContentContainer, html);
+                    document.querySelectorAll('.step-item').forEach(el => el.classList.remove('active'));
+                    document.querySelector(`.step-item[data-id="${id}"]`).classList.add('active');
+                }
+            };
+
+            processStepsContainer.addEventListener('click', (e) => e.target.closest('.step-item') && selectStep(e.target.closest('.step-item').dataset.id));
+            selectStep(1); // Select first step on load
+
+            // --- METHODOLOGY SECTION ---
+            const frameworkSelectorsContainer = document.getElementById('framework-selectors');
+            const frameworkContentContainer = document.getElementById('framework-content');
+            Object.keys(frameworkData).forEach(key => {
+                const selectorEl = document.createElement('button');
+                selectorEl.className = 'framework-item p-3 border-2 border-transparent rounded-lg font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition';
+                selectorEl.dataset.id = key;
+                selectorEl.textContent = key;
+                frameworkSelectorsContainer.appendChild(selectorEl);
+            });
+            
+            const selectFramework = (id) => {
+                const data = frameworkData[id];
+                if (data) {
+                    const html = `<ul class="space-y-3">${data.criteria.map(c => `<li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i><span class="text-slate-600">${c}</span></li>`).join('')}</ul>`;
+                    updateContent(frameworkContentContainer, html);
+                    document.querySelectorAll('.framework-item').forEach(el => el.classList.remove('active'));
+                    document.querySelector(`.framework-item[data-id="${id}"]`).classList.add('active');
+                }
+            };
+            
+            frameworkSelectorsContainer.addEventListener('click', (e) => e.target.closest('.framework-item') && selectFramework(e.target.closest('.framework-item').dataset.id));
+            selectFramework('BANT'); // Select first framework on load
+            
+            // --- CHARTS SECTION ---
+            const commonTooltipOptions = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            };
+            
+            // Tech Stack Chart
+            const techStackCtx = document.getElementById('techStackChart').getContext('2d');
+            new Chart(techStackCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Integración CRM', 'Bases de Datos y Prospección', 'Automatización de Outreach', 'Inteligencia de Ventas', 'Analítica y Reportes'],
+                    datasets: [{
+                        data: [30, 25, 20, 15, 10],
+                        backgroundColor: ['#4f46e5', '#34d399', '#f59e0b', '#ec4899', '#60a5fa'],
+                        borderColor: '#f7f8fc',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: { ...commonTooltipOptions, responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { ...commonTooltipOptions.plugins, legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } } } }
+            });
+            
+            // Impact Chart
+            const impactCtx = document.getElementById('impactChart').getContext('2d');
+            const impactData = {
+                withoutLitsa: {
+                    data: [500, 5, 10],
+                    colors: ['#a5b4fc', '#a7f3d0', '#fcd34d']
+                },
+                withLitsa: {
+                    data: [2000, 18, 45],
+                    colors: ['#60a5fa', '#34d399', '#f59e0b']
+                }
+            };
+            const impactChart = new Chart(impactCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Prospectos Contactados', 'Tasa de Respuesta (%)', 'Reuniones Agendadas'],
+                    datasets: [{
+                        label: 'Resultado Mensual',
+                        data: impactData.withLitsa.data,
+                        backgroundColor: impactData.withLitsa.colors,
+                        borderRadius: 6,
+                        borderSkipped: false,
+                    }]
+                },
+                options: { ...commonTooltipOptions, responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { drawBorder: false } }, x: { grid: { display: false } } }, plugins: { ...commonTooltipOptions.plugins, legend: { display: false } } }
+            });
+
+            const btnWithoutLitsa = document.getElementById('btn-without-litsa');
+            const btnWithLitsa = document.getElementById('btn-with-litsa');
+
+            const updateImpactChart = (isWithLitsa) => {
+                const dataset = impactChart.data.datasets[0];
+                const stateData = isWithLitsa ? impactData.withLitsa : impactData.withoutLitsa;
+                
+                dataset.data = stateData.data;
+                dataset.backgroundColor = stateData.colors;
+                impactChart.update();
+
+                btnWithLitsa.classList.toggle('bg-indigo-600', isWithLitsa);
+                btnWithLitsa.classList.toggle('text-white', isWithLitsa);
+                btnWithLitsa.classList.toggle('bg-gray-200', !isWithLitsa);
+                btnWithLitsa.classList.toggle('text-gray-800', !isWithLitsa);
+                btnWithoutLitsa.classList.toggle('bg-indigo-600', !isWithLitsa);
+                btnWithoutLitsa.classList.toggle('text-white', !isWithLitsa);
+                btnWithoutLitsa.classList.toggle('bg-gray-200', isWithLitsa);
+                btnWithoutLitsa.classList.toggle('text-gray-800', isWithLitsa);
+            };
+
+            btnWithoutLitsa.addEventListener('click', () => updateImpactChart(false));
+            btnWithLitsa.addEventListener('click', () => updateImpactChart(true));
+        });
+    </script>
+</body>
+</html>
